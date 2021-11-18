@@ -1,0 +1,36 @@
+﻿@model Factory54.Models.EmployeeShift
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddShiftForm</title>
+</head>
+<body>
+    <div>
+        @Session["UserName"]<br />
+        <input type="button" value="Log Out" onclick="location.href='@Url.Action("LogOut","Login")'" /><br /><br />
+
+        @Html.ActionLink("HomePage", "HomePage", "Login")<br /><br />
+        <h1>Add Shift to @ViewBag.EmpFullName</h1>
+
+        <form action="/Employee/AddChossenShift/" method="post">
+
+            @Html.HiddenFor(x => x.EmployeeID, new { Value = Model.EmployeeID })
+            Shift: @Html.DropDownListFor(x => x.ShiftID, new SelectList(ViewBag.AllShifts, "ID", "Date", "StartTime"))
+
+
+
+
+
+            <input type="submit" value="Add Shift To Employee" />
+
+        </form>
+        <br /><br />
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EmployeeData</title>
+</head>
+<body>
+    <div>
+        @Session["UserName"]<br />
+        <input type="button" value="Log Out" onclick="location.href='@Url.Action("LogOut","Login")'" /><br /><br />
+
+        @Html.ActionLink("HomePage", "HomePage", "Login")<br /><br />
+        <h1>Employees</h1>
+    </div>
+    <table border="1">
+        <tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Start Work Year</th><th>Department</th><th>Shifts</th><th>Action</th></tr>
+
+        @foreach (var emp in ViewBag.DepNameList)
+        {
+            <tr>
+                <td>@emp.EmployeeID</td>
+                <td>@emp.FName</td>
+                <td>@emp.LName</td>
+                <td>@emp.StartYear</td>
+                <td>@emp.NameOfDepartment</td>
+                <td>
+                    <ol>
+                        @foreach (var item in ViewBag.ScheduleList)
+                        {
+                            if (emp.EmployeeID == item.EmpID)
+                            {
+                                <li>Date :  @item.Date.ToString("dd/MM/yyyy")       Time : @(item.StartTime) -    @(item.EndTime)  </li>
+                            }
+                        }
+                    </ol>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditEmpForm", new { id = @emp.EmployeeID })
+                    @Html.ActionLink("Delete", "DeleteEmployee", new { id = @emp.EmployeeID })
+                </td>
+                <td>
+                    @Html.ActionLink("Add Shift", "AddShiftForm", new { id = @emp.EmployeeID })
+                </td>
+
+            </tr>
+        }
+
+    </table><br /><br />
+
+    <input type="button" value="Add New Employee" onclick="location.href='@Url.Action("AddEmpForm","Employee")'" />
+    <br /> <br />
+
+           
+          
+    <form method="post" action="/Employee/SearchEmployee/">
+
+        <input name="Phrase" type="text"   />
+
+        <input  value="Search For Employee Or Department" type="submit" />
+
+
+    </form>
+           
+
+
+
+
+
+
+</body>
+</html>

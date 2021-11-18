@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NoResult</title>
+</head>
+<body>
+    <div>
+        @Session["UserName"]<br />
+        <input type="button" value="Log Out" onclick="location.href='@Url.Action("LogOut","Login")'" /><br /><br /><br />
+
+        @Html.ActionLink("HomePage", "HomePage", "Login")<br /><br />
+
+        <h2>Result Not Found</h2>
+    </div>
+</body>
+</html>

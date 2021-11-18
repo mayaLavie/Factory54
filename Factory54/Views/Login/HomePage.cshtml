@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HomePage</title>
+</head>
+<body>
+    <div>
+        <h1>HomePage</h1><br />
+
+        <input type="button" value="Log Out" onclick="location.href='@Url.Action("LogOut","Login")'" /><br /><br /><br />
+        <br />
+        <h3>Hello @Session["UserName"] Welcome to Factory54</h3><br /><br />
+        @Html.ActionLink("Employees", "Index", "Employee") <br /><br />
+        @Html.ActionLink("Departments", "Index", "Department")<br /><br />
+        @Html.ActionLink("Shifts", "Index", "Shift")
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿@model Factory54.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        <form action="/Login/LoginConfirmation/" method="post">
+            User Name : @Html.EditorFor(x => x.UserName) <br />
+            Password  :@Html.EditorFor(x => x.Password) <br />
+
+           
+            <input type="submit" value="Log In" />
+
+        </form>
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿@model Factory54.Models.Employee
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddForm</title>
+</head>
+<body>
+    <div>
+        @Session["UserName"]<br /><br />
+        <input type="button" value="Log Out" onclick="location.href='@Url.Action("LogOut","Login")'" /><br /><br /><br />
+
+        @Html.ActionLink("HomePage", "HomePage", "Login")<br /><br />
+        <h1>Add New  Employee</h1>
+
+
+        <form action="/Employee/AddingNewEmp/" method="post">
+            @Html.HiddenFor(x => x.ID) <br />
+            First Name :@Html.EditorFor(x => x.FirstName) <br />
+            Last Name  :@Html.EditorFor(x => x.LastName) <br />
+            Start Work Year  :@Html.EditorFor(x => x.StartWorkYear) <br />
+            Department :  @Html.DropDownListFor(x => x.DepartmentID, new SelectList(ViewBag.DepList, "ID", "Name"))
+
+
+
+
+            <input type="submit" value="Add New Employee" />
+        </form>
+    </div>
+</body>
+</html>

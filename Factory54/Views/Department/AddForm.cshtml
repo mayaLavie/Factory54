@@ -1,0 +1,32 @@
+﻿@model Factory54.Models.Department
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddForm</title>
+</head>
+<body>
+    <div>
+        @Session["UserName"]<br />
+        <input type="button" value="Log Out" onclick="location.href='@Url.Action("LogOut","Login")'" /><br /><br /><br />
+
+        @Html.ActionLink("HomePage", "HomePage", "Login");<br />
+        <h1>New Department </h1>
+
+
+        <form action="/Department/AddingNewDep/" method="post">
+                             @Html.HiddenFor(x => x.ID) <br />
+            Department Name :@Html.EditorFor(x => x.Name) <br />
+            Department Manager: @Html.DropDownListFor(x => x.Manager, new SelectList(ViewBag.EmployeeList, "ID", "LastName"))<br />
+
+
+            <input type="submit" value="Add New Department" />
+        </form>
+    </div>
+</body>
+</html>

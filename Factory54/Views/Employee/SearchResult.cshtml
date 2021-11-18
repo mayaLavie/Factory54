@@ -1,0 +1,40 @@
+﻿@model Factory54.Models.DepartmentName
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SearchResult</title>
+</head>
+<body>
+    <div>
+        @Session["UserName"]<br /><br />
+        <input type="button" value="Log Out" onclick="location.href='@Url.Action("LogOut","Login")'" /><br /><br /><br />
+
+        @Html.ActionLink("HomePage", "HomePage", "Login")<br /><br />
+
+        <h1>Search Result</h1>
+
+        <table border="1">
+
+            <tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Start Work Year</th><th>Department</th></tr>
+
+            @foreach (var emp in ViewBag.SearchResult)
+            {
+                <tr>
+                    <td>@emp.EmployeeID</td>
+                    <td>@emp.FName</td>
+                    <td>@emp.LName</td>
+                    <td>@emp.StartYear</td>
+                    <td>@emp.NameOfDepartment</td>
+                </tr>
+
+            }
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿@model Factory54.Models.Shift
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddForm</title>
+</head>
+<body>
+    <div>
+        @Session["UserName"]<br />
+        <input type="button" value="Log Out" onclick="location.href='@Url.Action("LogOut","Login")'" /><br /><br /><br />
+
+        @Html.ActionLink("HomePage", "HomePage", "Login")<br /><br />
+
+        <h1>Add New Shift</h1>
+
+        <form action="/Shift/AddingNewShift/" method="post">
+                       @Html.HiddenFor(x => x.ID) <br />
+            Date :     @Html.EditorFor(x => x.Date) <br />
+            Start Time:@Html.EditorFor(x => x.StartTime) <br />
+            End Time : @Html.EditorFor(x => x.EndTime) <br />
+
+            <input type="submit" value="Add " />
+        </form>
+    </div>
+</body>
+</html>

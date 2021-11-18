@@ -1,0 +1,32 @@
+﻿@model Factory54.Models.Department
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EditForm</title>
+</head>
+<body>
+    <div>
+        @Session["UserName"]<br />
+        <input type="button" value="Log Out" onclick="location.href='@Url.Action("LogOut","Login")'" /><br /><br /><br />
+
+        @Html.ActionLink("HomePage", "HomePage", "Login")<br /><br />
+        <h1>Edit Department</h1>
+
+        <form action="/Department/EditDepartment/" method="post">
+            Department ID : @Html.TextBoxFor(x => x.ID) <br />
+            Department Name :@Html.EditorFor(x => x.Name) <br />
+
+            Department Employee: @Html.DropDownListFor(x => x.Manager, new SelectList(ViewBag.EmployeeList, "ID", "LastName", "FirstName"))<br />
+            <input type="submit" value="Update Department Details" />
+
+        </form>
+    </div>
+</body>
+</html>

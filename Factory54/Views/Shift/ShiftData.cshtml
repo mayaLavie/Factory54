@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShiftData</title>
+</head>
+<body>
+    <div>
+        @Session["UserName"]<br />
+        <input type="button" value="Log Out" onclick="location.href='@Url.Action("LogOut","Login")'" /><br /><br /><br />
+
+        @Html.ActionLink("HomePage", "HomePage", "Login")<br /><br />
+        <h1>Shifts Schedule</h1>
+
+        <table border="1">
+            <tr><th>ID</th><th>Date</th><th>StartTime</th><th>EndTime</th><th>Workers</th></tr>
+
+            @foreach (var shift in ViewBag.Shifts)
+            {
+                <tr>
+                    <td>@shift.ID</td>
+                    <td>@shift.Date.ToString("dd/MM/yyyy")</td>
+                    <td>@shift.StartTime</td>
+                    <td>@shift.EndTime</td>
+
+                    <td>
+
+                        @foreach (var item in ViewBag.WorkingEmp)
+                        {
+                            if (shift.ID == item.ShiftID)
+                            {
+
+                                string FullName = (item.FirstName) + (item.LastName);
+
+                                @Html.ActionLink(FullName, "EditEmpForm", "Employee", new { id = @item.EmpID }, null)
+
+                            }
+                        }
+
+                    </td>
+
+                </tr>
+            }
+
+        </table><br /><br />
+
+        <input type="button" value="Add New Shift" onclick="location.href='@Url.Action("AddShiftForm","Shift")'" />
+
+    </div>
+</body>
+</html>

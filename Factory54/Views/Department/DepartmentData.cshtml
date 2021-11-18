@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DepartmentTest</title>
+</head>
+<body>
+    <div>
+        @Session["UserName"]<br />
+        <input type="button" value="Log Out" onclick="location.href='@Url.Action("LogOut","Login")'" /><br /><br /><br />
+
+        @Html.ActionLink("HomePage", "HomePage", "Login")<br /><br />
+        
+
+        <h1>Departments </h1>
+
+        <table border="1">
+            <tr><th>Department</th><th>ID</th><th>Manager</th><th>Action</th></tr>
+            @foreach (var item in ViewBag.DepartmentData)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.ID</td>
+                    <td>
+                        @foreach (var Man in ViewBag.ManagerTable)
+                        {
+                            if (item.Manager == Man.ID)
+                            {
+
+                                @(Man.FullName);
+                                break;
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditDepForm", new { id = @item.ID })
+
+                        @{bool Todelete = false; }
+
+                        @foreach (var emp in ViewBag.EmployeeList)
+                        {
+                            if (item.ID == emp.DepartmentID)
+                            {
+                                Todelete = true; ;
+                                break;
+                            }
+                            else
+                            {
+                                Todelete = false;
+                            }
+                        }
+
+                        @if (Todelete == false)
+                        {
+                            @Html.ActionLink("Delete", "DeleteDepartment", new { id = @item.ID })
+                        }
+                    </td>
+                </tr>
+            }
+        </table><br /><br />
+        <input type="button" value="Add Department" onclick="location.href='@Url.Action("AddForm","Department")'" />
+        <br />
+
+    </div>
+</body>
+</html>
